@@ -1,6 +1,8 @@
 package ac.cr.ucenfotec.process_manager.entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document(collection ="usertypes")
 public class UserType {
 	@Id String userTypeId;
 	String userTypeName;

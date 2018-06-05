@@ -2,8 +2,10 @@ package ac.cr.ucenfotec.process_manager.entities;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 
 
+@Document(collection ="tasks")
 public class Task {
 	
 	private User Asignee;

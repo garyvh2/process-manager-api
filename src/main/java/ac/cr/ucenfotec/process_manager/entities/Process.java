@@ -2,7 +2,9 @@ package ac.cr.ucenfotec.process_manager.entities;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection ="processes")
 public class Process {
 	private int NumeroTramite;
 	private String Description;

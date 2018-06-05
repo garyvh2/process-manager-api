@@ -2,7 +2,9 @@ package ac.cr.ucenfotec.process_manager.entities;
 
 import java.util.Date;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection ="processhistories")
 public class ProcessHistory 
 {
 	private Date DateTimeHistory;

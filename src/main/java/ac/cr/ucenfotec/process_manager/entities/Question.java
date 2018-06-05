@@ -2,6 +2,9 @@ package ac.cr.ucenfotec.process_manager.entities;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection ="questions")
 public class Question {
 
 	private String QuestionText;
