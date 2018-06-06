@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,15 +39,27 @@ public class UserTypeController {
 		repository.save(ut);
 	}
 	
-	@PutMapping("/{userId}")
-	public ResponseEntity<?> UpdateUserType(@PathVariable String userId,@RequestBody  UserType ut) {
-		Optional<UserType> userT = repository.findById(userId);
+	@PutMapping("/{usertypeId}")
+	public ResponseEntity<?> UpdateUserType(@PathVariable String usertypeId,@RequestBody  UserType ut) {
+		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		//TODO: Validation and other things
 		repository.save(ut);
 		return new ResponseEntity<>(HttpStatus.OK); 
+	}
+	
+	@DeleteMapping("{/usertypeId}")
+	public ResponseEntity<?> DeleteUserType(@PathVariable String usertypeId){
+		Optional<UserType> userT = repository.findById(usertypeId);
+		if(!userT.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		repository.deleteById(usertypeId);
+		
+		return new ResponseEntity<>(HttpStatus.OK); 
+		
 	}
 	
 }
