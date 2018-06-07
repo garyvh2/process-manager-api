@@ -17,5 +17,9 @@ public class UserType {
 	public void setUserTypeName(String userTypeName) {
 		this.userTypeName = userTypeName;
 	}
+
+	public void setUserTypeId(String userTypeId) {
+		this.userTypeId = userTypeId;
+	}
 	
 }

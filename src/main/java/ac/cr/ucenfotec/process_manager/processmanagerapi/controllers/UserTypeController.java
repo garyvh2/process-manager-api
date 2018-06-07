@@ -1,12 +1,13 @@
 package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.UserType;
@@ -33,25 +35,35 @@ public class UserTypeController {
 		 
 		return  repository.findAll();
     }
-	
-	@PostMapping
-	public void PostUserType(@RequestBody UserType ut) {
-		repository.save(ut);
-	}
-	
-	@PutMapping("/{usertypeId}")
-	public ResponseEntity<?> UpdateUserType(@PathVariable String usertypeId,@RequestBody  UserType ut) {
+	@GetMapping("/{usertypeId}")
+	public ResponseEntity<UserType> getUserType (@PathVariable String usertypeId) {
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		
+		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK);
+	}
+	
+	@PostMapping
+	public ResponseEntity<UserType> postUserType(@RequestBody UserType ut) {
+		return new ResponseEntity<UserType>( repository.save(ut), HttpStatus.OK );
+	}
+	
+	@PutMapping("/{usertypeId}")
+	public ResponseEntity<?> updateUserType(@PathVariable String usertypeId,@RequestBody  UserType ut) {
+		Optional<UserType> userT = repository.findById(usertypeId);
+		if(!userT.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		ut.setUserTypeId(usertypeId);
 		//TODO: Validation and other things
 		repository.save(ut);
 		return new ResponseEntity<>(HttpStatus.OK); 
 	}
 	
-	@DeleteMapping("{/usertypeId}")
-	public ResponseEntity<?> DeleteUserType(@PathVariable String usertypeId){
+	@RequestMapping(value = "/{usertypeId}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteUserType(@PathVariable String usertypeId){
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
