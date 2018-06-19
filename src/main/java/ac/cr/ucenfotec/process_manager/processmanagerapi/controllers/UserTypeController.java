@@ -6,6 +6,8 @@ package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -46,7 +48,7 @@ public class UserTypeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserType> postUserType(@RequestBody UserType ut) {
+	public ResponseEntity<UserType> postUserType(@Valid @RequestBody UserType ut) {
 		return new ResponseEntity<UserType>( repository.save(ut), HttpStatus.OK );
 	}
 	
