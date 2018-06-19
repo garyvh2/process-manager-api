@@ -31,7 +31,7 @@ public class UserController {
 		return  repository.findAll();
     }
 	@GetMapping("/{userId}")
-	public ResponseEntity<User> getUserType (@PathVariable String userId) {
+	public ResponseEntity<User> getUser (@PathVariable String userId) {
 		Optional<User> user = repository.findById(userId);
 		if(!user.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -41,12 +41,12 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> postUserType(@RequestBody User user) {
+	public ResponseEntity<User> postUser(@RequestBody User user) {
 		return new ResponseEntity<User>( repository.save(user), HttpStatus.OK );
 	}
 	
 	@PutMapping("/{userId}")
-	public ResponseEntity<?> updateUserType(@PathVariable String userId,@RequestBody  User user) {
+	public ResponseEntity<?> updateUser(@PathVariable String userId,@RequestBody  User user) {
 		Optional<User> userT = repository.findById(userId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -57,7 +57,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteUserType(@PathVariable String userId){
+	public ResponseEntity<?> deleteUser(@PathVariable String userId){
 		Optional<User> userT = repository.findById(userId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
