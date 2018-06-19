@@ -11,7 +11,7 @@ public class Task {
 	private User Asignee;
 	private String Description;
 	private ArrayList<Question> Questions;
-	private Group userGroup;
+	private UserType userGroup;
 	
 	public User getAsignee() {
 		return Asignee;
@@ -31,10 +31,10 @@ public class Task {
 	public void setQuestions(ArrayList<Question> questions) {
 		Questions = questions;
 	}
-	public Group getUserGroup() {
+	public UserType getUserGroup() {
 		return userGroup;
 	}
-	public void setUserGroup(Group userGroup) {
+	public void setUserGroup(UserType userGroup) {
 		this.userGroup = userGroup;
 	}
 	
