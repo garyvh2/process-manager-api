@@ -3,12 +3,17 @@ package ac.cr.ucenfotec.process_manager.entities;
 import java.util.ArrayList;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 @Document(collection ="questions")
 public class Question {
 
+	@NotNull @NotBlank @NotEmpty
 	private String QuestionText;
+	@NotNull @NotBlank @NotEmpty
 	private String Type;
+	@NotNull
 	private ArrayList<String> AnswersToSelect;
 	private String UserAnswer;
 	

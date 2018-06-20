@@ -3,6 +3,8 @@ package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,12 +43,12 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> postUser(@RequestBody User user) {
+	public ResponseEntity<User> postUser(@Valid @RequestBody User user) {
 		return new ResponseEntity<User>( repository.save(user), HttpStatus.OK );
 	}
 	
 	@PutMapping("/{userId}")
-	public ResponseEntity<?> updateUser(@PathVariable String userId,@RequestBody  User user) {
+	public ResponseEntity<?> updateUser(@PathVariable String userId,@Valid @RequestBody  User user) {
 		Optional<User> userT = repository.findById(userId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -3,6 +3,8 @@ package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,12 +40,12 @@ public class ProcessController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Process> postProcess(@RequestBody Process process) {
+	public ResponseEntity<Process> postProcess(@Valid @RequestBody Process process) {
 		return new ResponseEntity<Process>( repository.save(process), HttpStatus.OK );
 	}
 	
 	@PutMapping("/{processId}")
-	public ResponseEntity<?> updateProcess(@PathVariable int processId,@RequestBody  Process process) {
+	public ResponseEntity<?> updateProcess(@PathVariable int processId, @Valid @RequestBody  Process process) {
 		Optional<Process> processTmp = repository.findOneByNumeroTramite(processId);
 		if(!processTmp.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

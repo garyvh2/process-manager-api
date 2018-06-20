@@ -3,11 +3,18 @@ package ac.cr.ucenfotec.process_manager.entities;
 import java.util.ArrayList;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 @Document(collection ="processes")
 public class Process {
+	
+	@NotNull @Positive
 	private int NumeroTramite;
+	@NotBlank @NotNull @NotEmpty
 	private String Description;
+	@NotNull
 	private ArrayList<Task> Tasks;
 	private User Requester;
 	

@@ -1,14 +1,23 @@
 package ac.cr.ucenfotec.process_manager.entities;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection ="users")
 public class User {
 
-	@Id String userId;
+	@Id 
+	String userId;
+	@NotNull @NotEmpty @NotBlank
 	String userName;
 	String userPassword;
+	@Email
 	String userEmail;
+	@NotNull
 	UserType userGroup;
 	public User() {
 		

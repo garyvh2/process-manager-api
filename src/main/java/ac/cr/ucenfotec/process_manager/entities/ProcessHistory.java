@@ -1,14 +1,18 @@
 package ac.cr.ucenfotec.process_manager.entities;
 
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection ="processhistories")
 public class ProcessHistory 
 {
+	@NotNull
 	private Date DateTimeHistory;
+	@NotNull
 	private User Asignee;
+	@NotNull
 	private Task TaskDone;
 	
 	public Date getDateTimeHistory() {
