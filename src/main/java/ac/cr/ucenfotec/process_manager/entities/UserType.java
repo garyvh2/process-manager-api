@@ -9,12 +9,22 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection ="usertypes")
 public class UserType {
+
+	
 	@Id 
 	String userTypeId;
 	@NotNull @NotBlank	@NotEmpty
-	@Size(min=2, message="User type name should have atleast 2 characters")
+	@Size(min=2, message="User type name should have at least 2 characters")
 	String userTypeName;
 	
+	public UserType() {
+		
+	}
+	
+	public UserType(String userTypeId, String userTypeName) {
+		this.userTypeId = userTypeId;
+		this.userTypeName = userTypeName;
+	}
 	public String getUserTypeId() {
 		return userTypeId;
 	}

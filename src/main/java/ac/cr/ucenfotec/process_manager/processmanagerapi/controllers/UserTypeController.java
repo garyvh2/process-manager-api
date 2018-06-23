@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.UserType;
+import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.UserTypeNotFoundException;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.UserTypeRepository;
 
 @RestController
@@ -39,7 +40,7 @@ public class UserTypeController {
 	public ResponseEntity<UserType> getUserType (@PathVariable String usertypeId) {
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new UserTypeNotFoundException("id- " + usertypeId);
 		}
 		
 		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK);
@@ -51,15 +52,15 @@ public class UserTypeController {
 	}
 	
 	@PutMapping("/{usertypeId}")
-	public ResponseEntity<?> updateUserType(@PathVariable String usertypeId,@RequestBody  UserType ut) {
+	public ResponseEntity<?> updateUserType(@PathVariable String usertypeId,@Valid @RequestBody  UserType ut) {
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new UserTypeNotFoundException("id- " + usertypeId);
 		}
 		ut.setUserTypeId(usertypeId);
 		//TODO: Validation and other things
-		repository.save(ut);
-		return new ResponseEntity<>(HttpStatus.OK); 
+		UserType updatedUserType = repository.save(ut);
+		return new ResponseEntity<UserType>(updatedUserType, HttpStatus.OK); 
 	}
 	
 	@RequestMapping(value = "/{usertypeId}", method = RequestMethod.DELETE)
@@ -70,7 +71,7 @@ public class UserTypeController {
 		}
 		repository.deleteById(usertypeId);
 		
-		return new ResponseEntity<>(HttpStatus.OK); 
+		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK); 
 		
 	}
 	
