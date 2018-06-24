@@ -8,41 +8,49 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import ac.cr.ucenfotec.process_manager.enums.Estado;
+
 
 @Document(collection ="tasks")
 public class Task {
 	
-	private User Asignee;
+	private User asignee;
 	@NotNull @NotEmpty @NotBlank
-	private String Description;
+	private String description;
 	@NotNull
-	private ArrayList<Question> Questions;
+	private ArrayList<Question> questions;
 	@NotNull
 	private UserType userGroup;
-	
+	private Estado taskStatus;
 	public User getAsignee() {
-		return Asignee;
+		return asignee;
 	}
 	public void setAsignee(User asignee) {
-		Asignee = asignee;
+		this.asignee = asignee;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 	public ArrayList<Question> getQuestions() {
-		return Questions;
+		return questions;
 	}
 	public void setQuestions(ArrayList<Question> questions) {
-		Questions = questions;
+		this.questions = questions;
 	}
 	public UserType getUserGroup() {
 		return userGroup;
 	}
 	public void setUserGroup(UserType userGroup) {
 		this.userGroup = userGroup;
+	}
+	public Estado getTaskStaus() {
+		return taskStatus;
+	}
+	public void setTaskStaus(Estado taskStaus) {
+		this.taskStatus = taskStaus;
 	}
 	
 	

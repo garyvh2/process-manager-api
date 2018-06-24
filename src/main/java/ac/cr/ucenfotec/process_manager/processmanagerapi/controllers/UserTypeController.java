@@ -36,6 +36,7 @@ public class UserTypeController {
 		 
 		return  repository.findAll();
     }
+	
 	@GetMapping("/{usertypeId}")
 	public ResponseEntity<UserType> getUserType (@PathVariable String usertypeId) {
 		Optional<UserType> userT = repository.findById(usertypeId);

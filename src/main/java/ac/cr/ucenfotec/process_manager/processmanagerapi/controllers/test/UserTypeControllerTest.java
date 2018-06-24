@@ -53,7 +53,8 @@ public class UserTypeControllerTest {
 		 //given
 		 List<UserType> userTList = Arrays.asList(userType);
 		 Mockito.when(
-				 userTypeRepository.findAll()).thenReturn(userTList);
+				 userTypeRepository.findAll())
+		 .thenReturn(userTList);
 		 //when
 		 MvcResult result = mvc.perform(get("/usertypes")
 	              // .with(user("blaze").password("Q1w2e3r4"))
@@ -72,7 +73,8 @@ public class UserTypeControllerTest {
 		//given
 		 Optional<UserType> oUserType =  Optional.of(userType);
 		 Mockito.when(
-				 userTypeRepository.findById(userTypeId)).thenReturn(oUserType);
+				 userTypeRepository.findById(userTypeId))
+		 .thenReturn(oUserType);
 		 //when
 		 MvcResult result = mvc.perform(get("/usertypes/"+userTypeId)
 	              // .with(user("blaze").password("Q1w2e3r4"))

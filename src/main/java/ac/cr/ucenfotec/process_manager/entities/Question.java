@@ -10,24 +10,24 @@ import javax.validation.constraints.NotNull;
 public class Question {
 
 	@NotNull @NotBlank @NotEmpty
-	private String QuestionText;
+	private String questionText;
 	@NotNull @NotBlank @NotEmpty
-	private String Type;
+	private String type;
 	@NotNull
 	private ArrayList<String> AnswersToSelect;
 	private String UserAnswer;
 	
 	public String getQuestionText() {
-		return QuestionText;
+		return questionText;
 	}
 	public void setQuestionText(String questionText) {
-		QuestionText = questionText;
+		this.questionText = questionText;
 	}
 	public String getType() {
-		return Type;
+		return type;
 	}
 	public void setType(String type) {
-		Type = type;
+		this.type = type;
 	}
 	public ArrayList<String> getAnswersToSelect() {
 		return AnswersToSelect;

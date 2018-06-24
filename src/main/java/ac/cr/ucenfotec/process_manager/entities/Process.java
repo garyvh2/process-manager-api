@@ -2,51 +2,51 @@ package ac.cr.ucenfotec.process_manager.entities;
 
 import java.util.ArrayList;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 @Document(collection ="processes")
 public class Process {
 	
-	@NotNull @Positive
-	private int NumeroTramite;
+	@Id
+	String numeroTramite;
 	@NotBlank @NotNull @NotEmpty
-	private String Description;
+	private String description;
 	@NotNull
-	private ArrayList<Task> Tasks;
-	private User Requester;
+	private ArrayList<Task> tasks;
+	private User requester;
 	
-	public int getNumeroTramite() {
-		return NumeroTramite;
+	public String getNumeroTramite() {
+		return numeroTramite;
 	}
-	public void setNumeroTramite(int numeroTramite) {
-		NumeroTramite = numeroTramite;
+	public void setNumeroTramite(String numeroTramite) {
+		this.numeroTramite = numeroTramite;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String descripcion) {
-		Description = descripcion;
+		description = descripcion;
 	}
 	public ArrayList<Task> getTasks() {
-		return Tasks;
+		return tasks;
 	}
 	public void setTasks(ArrayList<Task> tareas) {
-		Tasks = tareas;
+		tasks = tareas;
 	}
 	public void setTask(Task tarea) {
-		if(Tasks == null )
-			Tasks = new ArrayList<Task>();
+		if(tasks == null )
+			tasks = new ArrayList<Task>();
 		
-		Tasks.add(tarea);
+		tasks.add(tarea);
 		
 	}
-	public User getSolicitante() {
-		return Requester;
+	public User getRequester() {
+		return requester;
 	}
-	public void setSolicitante(User solicitante) {
-		Requester = solicitante;
+	public void setRequester(User requester) {
+		this.requester = requester;
 	}
 }

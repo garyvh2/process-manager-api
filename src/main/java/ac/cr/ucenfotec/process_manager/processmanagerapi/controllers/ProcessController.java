@@ -30,8 +30,8 @@ public class ProcessController {
 		return  repository.findAll();
     }
 	@GetMapping("/{processId}")
-	public ResponseEntity<Process> getProcess (@PathVariable int processId) {
-		Optional<Process> process = repository.findOneByNumeroTramite(processId);
+	public ResponseEntity<Process> getProcess (@PathVariable String processId) {
+		Optional<Process> process = repository.findById(processId);
 		if(!process.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -41,12 +41,13 @@ public class ProcessController {
 	
 	@PostMapping
 	public ResponseEntity<Process> postProcess(@Valid @RequestBody Process process) {
-		return new ResponseEntity<Process>( repository.save(process), HttpStatus.OK );
+		Process newProcess = repository.save(process);
+		return new ResponseEntity<Process>( newProcess, HttpStatus.OK );
 	}
 	
 	@PutMapping("/{processId}")
-	public ResponseEntity<?> updateProcess(@PathVariable int processId, @Valid @RequestBody  Process process) {
-		Optional<Process> processTmp = repository.findOneByNumeroTramite(processId);
+	public ResponseEntity<?> updateProcess(@PathVariable String processId, @Valid @RequestBody  Process process) {
+		Optional<Process> processTmp = repository.findById(processId);
 		if(!processTmp.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -56,12 +57,12 @@ public class ProcessController {
 	}
 	
 	@RequestMapping(value = "/{processId}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteProcess(@PathVariable int processId){
-		Optional<Process> userT = repository.findOneByNumeroTramite(processId);
+	public ResponseEntity<?> deleteProcess(@PathVariable String processId){
+		Optional<Process> userT = repository.findById(processId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		repository.deleteByNumeroTramite(processId);
+		repository.deleteById(processId);
 		
 		return new ResponseEntity<>(HttpStatus.OK); 
 	}

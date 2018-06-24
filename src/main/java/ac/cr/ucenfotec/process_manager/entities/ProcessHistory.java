@@ -9,29 +9,29 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ProcessHistory 
 {
 	@NotNull
-	private Date DateTimeHistory;
+	private Date dateTimeHistory;
 	@NotNull
-	private User Asignee;
+	private User asignee;
 	@NotNull
-	private Task TaskDone;
+	private Task taskDone;
 	
 	public Date getDateTimeHistory() {
-		return DateTimeHistory;
+		return dateTimeHistory;
 	}
 	public void setDateTimeHistory(Date dateTimeHistory) {
-		DateTimeHistory = dateTimeHistory;
+		this.dateTimeHistory = dateTimeHistory;
 	}
 	public User getAsignee() {
-		return Asignee;
+		return asignee;
 	}
 	public void setAsignee(User asignee) {
-		Asignee = asignee;
+		this.asignee = asignee;
 	}
 	public Task getTaskDone() {
-		return TaskDone;
+		return taskDone;
 	}
 	public void setTaskDone(Task taskDone) {
-		TaskDone = taskDone;
+		this.taskDone = taskDone;
 	}
 	
 	

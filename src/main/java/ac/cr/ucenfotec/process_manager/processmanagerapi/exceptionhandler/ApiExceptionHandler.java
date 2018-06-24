@@ -35,7 +35,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	 protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 	    HttpHeaders headers, HttpStatus status, WebRequest request) {
 		 ExceptionMessage errorDetails = new ExceptionMessage(new Date(), "Validation Failed",
-	    ex.getBindingResult().getFieldError().getDefaultMessage());
+	    ex.getBindingResult().getFieldError().toString());
 	    return new ResponseEntity<Object>(errorDetails, HttpStatus.BAD_REQUEST);
 	} 
 
