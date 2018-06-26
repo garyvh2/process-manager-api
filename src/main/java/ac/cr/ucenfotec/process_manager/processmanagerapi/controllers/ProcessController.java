@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.Process;
+import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessRepository;
 @RestController
 @RequestMapping("/processes")
@@ -33,7 +34,7 @@ public class ProcessController {
 	public ResponseEntity<Process> getProcess (@PathVariable String processId) {
 		Optional<Process> process = repository.findById(processId);
 		if(!process.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new NotFoundException("id- " + processId);
 		}
 		
 		return new ResponseEntity<Process>(process.get(), HttpStatus.OK);
@@ -49,22 +50,22 @@ public class ProcessController {
 	public ResponseEntity<?> updateProcess(@PathVariable String processId, @Valid @RequestBody  Process process) {
 		Optional<Process> processTmp = repository.findById(processId);
 		if(!processTmp.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new NotFoundException("id- " + processId);
 		}
 		process.setNumeroTramite(processId);
 		repository.save(process);
-		return new ResponseEntity<>(HttpStatus.OK); 
+		return new ResponseEntity<Process>(repository.save(process), HttpStatus.OK); 
 	}
 	
 	@RequestMapping(value = "/{processId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteProcess(@PathVariable String processId){
 		Optional<Process> userT = repository.findById(processId);
 		if(!userT.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new NotFoundException("id- " + processId);
 		}
 		repository.deleteById(processId);
 		
-		return new ResponseEntity<>(HttpStatus.OK); 
+		return new ResponseEntity<Process>(userT.get(), HttpStatus.OK); 
 	}
 
 }

@@ -1,0 +1,99 @@
+{
+    "numeroTramite": "5b31837808b0191998d81680",
+    "description": "Obtener Prestamo",
+    "tasks": [
+        {
+            "asignee": null,
+            "description": "Solicitud de Prestamo",
+            "questions": [
+                {
+                    "questionText": "Digite su numero de cedula",
+                    "type": "String",
+                    "userAnswer": null,
+                    "answersToSelect": null
+                },
+                {
+                    "questionText": "Para que es el prestamo",
+                    "type": "Custom",
+                    "userAnswer": null,
+                    "answersToSelect": [
+                        "Carro",
+                        "Vivienda",
+                        "Estudio",
+                        "Otro"
+                    ]
+                },
+                {
+                    "questionText": "Digite el monto que desea obtener",
+                    "type": "Custom",
+                    "userAnswer": null,
+                    "answersToSelect": null
+                }
+            ],
+            "userGroup": {
+                "userTypeId": null,
+                "userTypeName": "cliente"
+            },
+            "taskStaus": null
+        },
+        {
+            "asignee": null,
+            "description": "Verificar requisitos",
+            "questions": [
+                {
+                    "questionText": "Es mayor de edad",
+                    "type": "Custom",
+                    "userAnswer": null,
+                    "answersToSelect": [
+                        "Si",
+                        "No"
+                    ]
+                },
+                {
+                    "questionText": "Puede pagar el prestamo",
+                    "type": "Custom",
+                    "userAnswer": null,
+                    "answersToSelect": [
+                        "Si",
+                        "No"
+                    ]
+                }
+            ],
+            "userGroup": {
+                "userTypeId": null,
+                "userTypeName": "secretario"
+            },
+            "taskStaus": null
+        },
+        {
+            "asignee": null,
+            "description": "Aprobar prestamo",
+            "questions": [
+                {
+                    "questionText": "Ha revisado y acepta el prestar el dinero a este cliente",
+                    "type": "Custom",
+                    "userAnswer": null,
+                    "answersToSelect": [
+                        "Si",
+                        "No"
+                    ]
+                }
+            ],
+            "userGroup": {
+                "userTypeId": null,
+                "userTypeName": "gerente"
+            },
+            "taskStaus": null
+        }
+    ],
+    "requester": {
+        "userId": null,
+        "userName": "Adrian13",
+        "userPassword": null,
+        "userEmail": "adrian@gmail.com",
+        "userGroup": {
+            "userTypeId": null,
+            "userTypeName": "cliente"
+        }
+    }
+}

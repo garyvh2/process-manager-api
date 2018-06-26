@@ -18,6 +18,7 @@ public class Process {
 	private ArrayList<Task> tasks;
 	private User requester;
 	
+
 	public String getNumeroTramite() {
 		return numeroTramite;
 	}
@@ -49,4 +50,34 @@ public class Process {
 	public void setRequester(User requester) {
 		this.requester = requester;
 	}
+	@Override
+	public int hashCode() {
+		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((numeroTramite == null) ? 0 : numeroTramite.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Process))
+			return false;
+		Process other = (Process) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (numeroTramite == null) {
+			if (other.numeroTramite != null)
+				return false;
+		} else if (!numeroTramite.equals(other.numeroTramite))
+			return false;
+		return true;
+	}
+	
+	
 }

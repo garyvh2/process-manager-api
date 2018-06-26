@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ac.cr.ucenfotec.process_manager.entities.ExceptionMessage;
-import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.UserTypeNotFoundException;
+import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
 
 @ControllerAdvice
 @RestController
@@ -25,8 +25,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	    return new ResponseEntity<Object>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 	  }
 	  
-	  @ExceptionHandler(UserTypeNotFoundException.class)
-	  public final ResponseEntity<Object> handleUserTypeNotFoundException(UserTypeNotFoundException ex, WebRequest request){
+	  @ExceptionHandler(NotFoundException.class)
+	  public final ResponseEntity<Object> handleUserTypeNotFoundException(NotFoundException ex, WebRequest request){
 		  ExceptionMessage errorDetails = new ExceptionMessage(new Date(), ex.getMessage(),
 			        request.getDescription(false));
 			    return new ResponseEntity<Object>(errorDetails, HttpStatus.NOT_FOUND);

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.UserType;
-import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.UserTypeNotFoundException;
+import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.UserTypeRepository;
 
 @RestController
@@ -41,7 +41,7 @@ public class UserTypeController {
 	public ResponseEntity<UserType> getUserType (@PathVariable String usertypeId) {
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
-			throw new UserTypeNotFoundException("id- " + usertypeId);
+			throw new NotFoundException("id- " + usertypeId);
 		}
 		
 		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK);
@@ -56,7 +56,7 @@ public class UserTypeController {
 	public ResponseEntity<?> updateUserType(@PathVariable String usertypeId,@Valid @RequestBody  UserType ut) {
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
-			throw new UserTypeNotFoundException("id- " + usertypeId);
+			throw new NotFoundException("id- " + usertypeId);
 		}
 		ut.setUserTypeId(usertypeId);
 		//TODO: Validation and other things
