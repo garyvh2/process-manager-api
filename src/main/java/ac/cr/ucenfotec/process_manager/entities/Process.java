@@ -50,13 +50,7 @@ public class Process {
 	public void setRequester(User requester) {
 		this.requester = requester;
 	}
-	@Override
-	public int hashCode() {
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((numeroTramite == null) ? 0 : numeroTramite.hashCode());
-		return result;
-	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

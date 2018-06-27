@@ -1,8 +1,11 @@
 package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ac.cr.ucenfotec.process_manager.entities.User;
+import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.UserRepository;
 
 
@@ -71,19 +75,14 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK); 
 	}
 	
-	@GetMapping("/authenticateUser/{userMail}/{userPassword}")
-	public User authenticateUser (@PathVariable String userMail, @PathVariable String userPassword) {
+	@PostMapping("/authenticateUser")
+	public User authenticateUser (@RequestBody  User user) {
+		Optional<User> authUser =  repository.findByUserEmailAndUserPassword(user.getUserEmail(), user.getUserPassword());
+		if(!authUser.isPresent()) {
+			throw new NotFoundException("couldn't find user");
+		}
 
-		List<User> user = repository.findAll();
-		
-		if(!user.isEmpty()) {
-			for (User userDB : user) {
-				if(userDB.getUserEmail().equals(userMail) &&
-				   userDB.getUserPassword().equals(userPassword))
-					return userDB;
-			}			
-		}		
-		return null;
+		return user;
 	}
 
 }
