@@ -41,9 +41,6 @@ public class UserTypeControllerTest {
 	String userTypeId = new ObjectId().toString();
 	
 	UserType userType = new UserType(userTypeId, "test");
-
-	
-	
 	
 	@MockBean
 	 private UserTypeRepository userTypeRepository;
@@ -81,8 +78,6 @@ public class UserTypeControllerTest {
 	               .contentType(MediaType.APPLICATION_JSON))
 	               .andExpect(status().isOk())
 	               .andReturn();
-
-		 
 		 //Test
 		 String expected = "{userTypeId:"+ userTypeId + ",userTypeName:" + userType.getUserTypeName() + "}";
 		 JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), true);
@@ -101,7 +96,6 @@ public class UserTypeControllerTest {
 	               .andReturn();
 		 MockHttpServletResponse response = result.getResponse();
 		 assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
-
 	 }
 	 
 	 @Test
@@ -120,8 +114,7 @@ public class UserTypeControllerTest {
 		 
 		 MockHttpServletResponse response = result.getResponse();
 		 assertEquals(HttpStatus.OK.value(), response.getStatus());
-		 JSONAssert.assertEquals(jsonUserType, response.getContentAsString(), true);
-		 
+		 JSONAssert.assertEquals(jsonUserType, response.getContentAsString(), true);		 
 	 }
 	 
 	 @Test
@@ -136,9 +129,7 @@ public class UserTypeControllerTest {
 		 Mockito.when(
 				 userTypeRepository.save(Mockito.any(UserType.class))
 				 ).thenReturn(updateUserType);
-		 
-		 
-		 
+		 		 
 		 MvcResult result = mvc.perform(put("/usertypes/"+userTypeId)
 				   .accept(MediaType.APPLICATION_JSON)
 				   .content(jsonUserType)
@@ -159,8 +150,7 @@ public class UserTypeControllerTest {
 		 Mockito.when(
 				 userTypeRepository.findById(userTypeId))
 		 .thenReturn(oUserType);
-		 
-		 
+		 		 
 		 MvcResult result = mvc.perform(put("/usertypes/"+userTypeId)
 				   .accept(MediaType.APPLICATION_JSON)
 				   .content(jsonUserType)
@@ -175,8 +165,7 @@ public class UserTypeControllerTest {
 		 ObjectMapper mapper = new ObjectMapper();
 		 UserType updateUserType = new UserType(userTypeId, null);
 		 String jsonUserType =  mapper.writeValueAsString(updateUserType);
-		 
-		 
+		 		 
 		 MvcResult result = mvc.perform(put("/usertypes/"+userTypeId)
 				   .accept(MediaType.APPLICATION_JSON)
 				   .content(jsonUserType)
@@ -203,9 +192,8 @@ public class UserTypeControllerTest {
 	               .andReturn();
 		 MockHttpServletResponse response = result.getResponse();
 		 assertEquals(HttpStatus.OK.value(), response.getStatus());
-		
-		 
 	 }
+	 
 	 @Test
 	 public void deleteUserTypeNotFound() throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
@@ -214,7 +202,6 @@ public class UserTypeControllerTest {
 		 Mockito.when(
 				 userTypeRepository.findById(userTypeId))
 		 .thenReturn(oUserType);
-
 		 
 		 MvcResult result = mvc.perform(put("/usertypes/"+userTypeId)
 				   .accept(MediaType.APPLICATION_JSON)
@@ -224,6 +211,4 @@ public class UserTypeControllerTest {
 		 MockHttpServletResponse response = result.getResponse();
 		 assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 	 }
-
-
 }

@@ -31,9 +31,9 @@ public class UserTypeController {
 
 	@Autowired
 	private UserTypeRepository repository;
+	
 	@GetMapping
-    public List<UserType> getAll(){
-		 
+    public List<UserType> getAll(){		 
 		return  repository.findAll();
     }
 	
@@ -72,8 +72,6 @@ public class UserTypeController {
 		}
 		repository.deleteById(usertypeId);
 		
-		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK); 
-		
-	}
-	
+		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK); 		
+	}	
 }

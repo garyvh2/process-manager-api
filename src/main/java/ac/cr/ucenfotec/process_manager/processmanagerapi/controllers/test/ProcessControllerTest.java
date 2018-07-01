@@ -47,6 +47,7 @@ public class ProcessControllerTest {
 	 String processId;
 	 Process process;
 	 ObjectMapper mapper;
+	 
 	@MockBean
 	 private ProcessRepository processRepository;
 	
@@ -59,9 +60,7 @@ public class ProcessControllerTest {
 		System.out.println(jsonFile.toString());
 		processId =  process.getNumeroTramite();
 	}
-	
-
-	 
+		 
 	 @Test 
 	 public void RetriveAllProcess() throws Exception {
 		 //given
@@ -81,7 +80,7 @@ public class ProcessControllerTest {
 		 Process[] returnedProcess =  mapper.readValue(result.getResponse().getContentAsString(), Process[].class);
 		 assertEquals(true,process.equals(returnedProcess[0]));
 	 }
-//	 
+ 
 	 @Test 
 	 public void RetrieveSingleProcess() throws Exception{
 		//given
@@ -137,7 +136,7 @@ public class ProcessControllerTest {
 		 JSONAssert.assertEquals(jsonUserType, response.getContentAsString(), false);
 		 
 	 }
-//	 
+	 
 	 @Test
 	 public void updateUserType() throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
@@ -151,9 +150,7 @@ public class ProcessControllerTest {
 		 Mockito.when(
 				 processRepository.save(Mockito.any(Process.class))
 				 ).thenReturn(updatedProcess);
-		 
-		 
-		 
+		 		 
 		 MvcResult result = mvc.perform(put("/processes/"+processId)
 				   .accept(MediaType.APPLICATION_JSON)
 				   .content(jsonProcess)
@@ -164,7 +161,7 @@ public class ProcessControllerTest {
 		 assertEquals(HttpStatus.OK.value(), response.getStatus());
 		 JSONAssert.assertEquals(jsonProcess, response.getContentAsString(), true);
 	 }
-//	 
+	 
 	 @Test
 	 public void updateUserTypeNotFound()throws Exception {
 		 Optional<Process> oProcess =  Optional.empty();
@@ -187,7 +184,7 @@ public class ProcessControllerTest {
 		 MockHttpServletResponse response = result.getResponse();
 		 assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 	 }
-//	 
+	 
 	 @Test 
 	 public void updateInvalidUserType () throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
@@ -215,7 +212,7 @@ public class ProcessControllerTest {
 		 MockHttpServletResponse response = result.getResponse();
 		 assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
 	 }
-//	 
+	 
 	 @Test 
 	 public void deleteUserType() throws Exception {
 
@@ -236,6 +233,7 @@ public class ProcessControllerTest {
 		
 		 
 	 }
+	 
 	 @Test
 	 public void deleteUserTypeNotFound() throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
@@ -254,6 +252,4 @@ public class ProcessControllerTest {
 		 MockHttpServletResponse response = result.getResponse();
 		 assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 	 }
-
-
 }
