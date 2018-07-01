@@ -26,11 +26,12 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	  }
 	  
 	  @ExceptionHandler(NotFoundException.class)
-	  public final ResponseEntity<Object> handleUserTypeNotFoundException(NotFoundException ex, WebRequest request){
+	  public final ResponseEntity<Object> handleUserTypeNotFoundException(NotFoundException ex, WebRequest request) {
 		  ExceptionMessage errorDetails = new ExceptionMessage(new Date(), ex.getMessage(),
 			        request.getDescription(false));
 			    return new ResponseEntity<Object>(errorDetails, HttpStatus.NOT_FOUND);
 	  }
+	  
 	 @Override
 	 protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 	    HttpHeaders headers, HttpStatus status, WebRequest request) {
