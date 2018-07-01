@@ -9,6 +9,7 @@ import ac.cr.ucenfotec.process_manager.entities.Process;;
 public interface ProcessRepository extends MongoRepository<Process, String>{
 	
 	Optional<Process> findOneByNumeroTramite(int NumeroTramite);
+	
 	Process deleteByNumeroTramite (int NumeroTramite);
-
+	
 }

@@ -10,7 +10,9 @@ import ac.cr.ucenfotec.process_manager.entities.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
+	
 	List<User> findByUserGroupUserTypeName(String userTypeName);
+	
 	Optional<User> findByUserEmailAndUserPassword(String userEmail, String userPassword);
-
+	
 }

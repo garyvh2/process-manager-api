@@ -7,7 +7,7 @@ public class UserTypeControllerTest {
 	public UserTypeControllerTest() {
 		// TODO Auto-generated constructor stub
 	}
-	private MockMvc  mockMvc;
 	
+	private MockMvc  mockMvc;	
 
 }
