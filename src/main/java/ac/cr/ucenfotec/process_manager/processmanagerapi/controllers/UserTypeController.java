@@ -59,7 +59,6 @@ public class UserTypeController {
 			throw new NotFoundException("id- " + usertypeId);
 		}
 		ut.setUserTypeId(usertypeId);
-		//TODO: Validation and other things
 		UserType updatedUserType = repository.save(ut);
 		return new ResponseEntity<UserType>(updatedUserType, HttpStatus.OK); 
 	}

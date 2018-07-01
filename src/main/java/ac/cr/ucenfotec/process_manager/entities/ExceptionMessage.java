@@ -9,7 +9,6 @@ public class ExceptionMessage {
 	private String details;
 	
 	public ExceptionMessage() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ExceptionMessage(Date timestamp, String message, String details) {
@@ -65,7 +64,6 @@ public class ExceptionMessage {
 			return true;
 		else
 			return false;
-	}
-	
+	}	
 	
 }
