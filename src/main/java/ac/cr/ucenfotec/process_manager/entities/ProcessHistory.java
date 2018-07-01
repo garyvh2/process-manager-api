@@ -18,22 +18,25 @@ public class ProcessHistory
 	public Date getDateTimeHistory() {
 		return dateTimeHistory;
 	}
+	
 	public void setDateTimeHistory(Date dateTimeHistory) {
 		this.dateTimeHistory = dateTimeHistory;
 	}
+	
 	public User getAsignee() {
 		return asignee;
 	}
+	
 	public void setAsignee(User asignee) {
 		this.asignee = asignee;
 	}
+	
 	public Task getTaskDone() {
 		return taskDone;
 	}
+	
 	public void setTaskDone(Task taskDone) {
 		this.taskDone = taskDone;
-	}
-	
-	
+	}		
 
 }
