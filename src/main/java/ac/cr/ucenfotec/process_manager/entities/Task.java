@@ -25,6 +25,7 @@ public class Task {
 	@NotNull
 	private UserType userGroup;
 	private Estado taskStatus;
+	private String fatherProcess;
 	
 	public User getAsignee() {
 		return asignee;
@@ -64,6 +65,14 @@ public class Task {
 	
 	public void setTaskStaus(Estado taskStaus) {
 		this.taskStatus = taskStaus;
+	}
+
+	public String getFatherProcess() {
+		return fatherProcess;
+	}
+
+	public void setFatherProcess(String fatherProcess) {
+		this.fatherProcess = fatherProcess;
 	}	
 	
 }

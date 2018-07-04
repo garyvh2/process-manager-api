@@ -1,5 +1,7 @@
 package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.Process;
+import ac.cr.ucenfotec.process_manager.entities.Task;
+import ac.cr.ucenfotec.process_manager.entities.UserType;
+import ac.cr.ucenfotec.process_manager.enums.Estado;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessRepository;
 
@@ -70,5 +75,7 @@ public class ProcessController {
 		
 		return new ResponseEntity<Process>(userT.get(), HttpStatus.OK); 
 	}
+	
+	
 
 }
