@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import ac.cr.ucenfotec.process_manager.enums.Estado;
+import ac.cr.ucenfotec.process_manager.enums.Status;
 
 
 @Document(collection ="tasks")
@@ -24,7 +24,7 @@ public class Task {
 	
 	@NotNull
 	private UserType userGroup;
-	private Estado taskStatus;
+	private Status taskStatus;
 	private String fatherProcess;
 	
 	public User getAsignee() {
@@ -59,11 +59,11 @@ public class Task {
 		this.userGroup = userGroup;
 	}
 	
-	public Estado getTaskStaus() {
+	public Status getTaskStaus() {
 		return taskStatus;
 	}
 	
-	public void setTaskStaus(Estado taskStaus) {
+	public void setTaskStaus(Status taskStaus) {
 		this.taskStatus = taskStaus;
 	}
 

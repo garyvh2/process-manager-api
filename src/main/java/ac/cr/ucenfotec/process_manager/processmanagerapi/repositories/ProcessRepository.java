@@ -15,8 +15,7 @@ public interface ProcessRepository extends MongoRepository<Process, String>{
 	
 	Process deleteByNumeroTramite (int NumeroTramite);
 	
-	//@Query(value = "{'tasks.0.userGroup' : ?0 }")
-	@Query(value = "{'tasks': { '$elemMatch': { 'userGroup' : ?0 }}}")
+	@Query(value = "{'tasks.0.userGroup' : ?0 }")
 	public List<Process> findByFirstTask(UserType userType);
 	
 }

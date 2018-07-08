@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ac.cr.ucenfotec.process_manager.entities.Process;
 import ac.cr.ucenfotec.process_manager.entities.Task;
 import ac.cr.ucenfotec.process_manager.entities.UserType;
-import ac.cr.ucenfotec.process_manager.enums.Estado;
+import ac.cr.ucenfotec.process_manager.enums.Status;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessRepository;
 
