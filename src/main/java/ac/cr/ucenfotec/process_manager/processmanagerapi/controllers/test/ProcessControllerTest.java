@@ -22,7 +22,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ac.cr.ucenfotec.process_manager.entities.Process;
+import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.controllers.ProcessController;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessRepository;
 
@@ -45,7 +45,7 @@ public class ProcessControllerTest {
 	@Autowired
 	private MockMvc mvc;
 	 String processId;
-	 Process process;
+	 ProcessTemplate process;
 	 ObjectMapper mapper;
 	 
 	@MockBean
@@ -56,7 +56,7 @@ public class ProcessControllerTest {
 		String url = "src/main/resources/process.json" ;
 		File jsonFile = new File(url);
 		mapper = new ObjectMapper();
-		process = mapper.readValue(jsonFile, Process.class);
+		process = mapper.readValue(jsonFile, ProcessTemplate.class);
 		System.out.println(jsonFile.toString());
 		processId =  process.getNumeroTramite();
 	}
@@ -64,7 +64,7 @@ public class ProcessControllerTest {
 	 @Test 
 	 public void RetriveAllProcess() throws Exception {
 		 //given
-		 List<Process> processList = Arrays.asList(process);
+		 List<ProcessTemplate> processList = Arrays.asList(process);
 		 Mockito.when(
 				 processRepository.findAll())
 		 .thenReturn(processList);
@@ -77,14 +77,14 @@ public class ProcessControllerTest {
 	               .andReturn();
 		 
 		 //Test
-		 Process[] returnedProcess =  mapper.readValue(result.getResponse().getContentAsString(), Process[].class);
+		 ProcessTemplate[] returnedProcess =  mapper.readValue(result.getResponse().getContentAsString(), ProcessTemplate[].class);
 		 assertEquals(true,process.equals(returnedProcess[0]));
 	 }
  
 	 @Test 
 	 public void RetrieveSingleProcess() throws Exception{
 		//given
-		 Optional<Process> oProcess =  Optional.of(process);
+		 Optional<ProcessTemplate> oProcess =  Optional.of(process);
 		 Mockito.when(
 				 processRepository.findById(processId))
 		 .thenReturn(oProcess);
@@ -97,14 +97,14 @@ public class ProcessControllerTest {
 
 		 
 		 //Test
-		 Process returnedProcess =  mapper.readValue(result.getResponse().getContentAsString(), Process.class);
+		 ProcessTemplate returnedProcess =  mapper.readValue(result.getResponse().getContentAsString(), ProcessTemplate.class);
 		 assertEquals(true,process.equals(returnedProcess));
 	 }
 	 
 	 @Test
 	 public void ProcessNotFound() throws Exception{
 			//given
-		 Optional<Process> oProcess =  Optional.empty();
+		 Optional<ProcessTemplate> oProcess =  Optional.empty();
 		 Mockito.when(
 				 processRepository.findById(processId)
 				 ).thenReturn(oProcess);
@@ -122,7 +122,7 @@ public class ProcessControllerTest {
 		 ObjectMapper mapper = new ObjectMapper();
 		 String jsonUserType =  mapper.writeValueAsString(process);
 		 Mockito.when(
-				 processRepository.save(Mockito.any(Process.class))
+				 processRepository.save(Mockito.any(ProcessTemplate.class))
 				 ).thenReturn(process);
 		 
 		 MvcResult result = mvc.perform(post("/processes")
@@ -140,15 +140,15 @@ public class ProcessControllerTest {
 	 @Test
 	 public void updateUserType() throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
-		 Optional<Process> oProcess =  Optional.of(process);
-		 Process updatedProcess = process;
+		 Optional<ProcessTemplate> oProcess =  Optional.of(process);
+		 ProcessTemplate updatedProcess = process;
 		 updatedProcess.getTasks().add(process.getTasks().get(0));
 		 String jsonProcess =  mapper.writeValueAsString(updatedProcess);
 		 Mockito.when(
 				 processRepository.findById(processId))
 		 .thenReturn(oProcess);
 		 Mockito.when(
-				 processRepository.save(Mockito.any(Process.class))
+				 processRepository.save(Mockito.any(ProcessTemplate.class))
 				 ).thenReturn(updatedProcess);
 		 		 
 		 MvcResult result = mvc.perform(put("/processes/"+processId)
@@ -164,8 +164,8 @@ public class ProcessControllerTest {
 	 
 	 @Test
 	 public void updateUserTypeNotFound()throws Exception {
-		 Optional<Process> oProcess =  Optional.empty();
-		 Process updatedProcess = process;
+		 Optional<ProcessTemplate> oProcess =  Optional.empty();
+		 ProcessTemplate updatedProcess = process;
 		 updatedProcess.getTasks().add(process.getTasks().get(0));
 		 String jsonProcess =  mapper.writeValueAsString(updatedProcess);
 		 Mockito.when(
@@ -188,8 +188,8 @@ public class ProcessControllerTest {
 	 @Test 
 	 public void updateInvalidUserType () throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
-		 Optional<Process> oProcess =  Optional.of(process);
-		 Process updatedProcess = process;
+		 Optional<ProcessTemplate> oProcess =  Optional.of(process);
+		 ProcessTemplate updatedProcess = process;
 		 updatedProcess.getTasks().add(process.getTasks().get(0));
 		 updatedProcess.setDescription(null);
 		 updatedProcess.setNumeroTramite(null);
@@ -198,7 +198,7 @@ public class ProcessControllerTest {
 				 processRepository.findById(processId))
 		 .thenReturn(oProcess);
 		 Mockito.when(
-				 processRepository.save(Mockito.any(Process.class))
+				 processRepository.save(Mockito.any(ProcessTemplate.class))
 				 ).thenReturn(updatedProcess);
 		 
 		 
@@ -216,7 +216,7 @@ public class ProcessControllerTest {
 	 @Test 
 	 public void deleteUserType() throws Exception {
 
-		 Optional<Process> oProcess =  Optional.of(process);
+		 Optional<ProcessTemplate> oProcess =  Optional.of(process);
 		 String jsonUserType =  mapper.writeValueAsString(process);
 		 Mockito.when(
 				 processRepository.findById(processId))
@@ -237,7 +237,7 @@ public class ProcessControllerTest {
 	 @Test
 	 public void deleteUserTypeNotFound() throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
-		 Optional<Process> oProcess =  Optional.empty();
+		 Optional<ProcessTemplate> oProcess =  Optional.empty();
 		 String jsonUserType =  mapper.writeValueAsString(process);
 		 Mockito.when(
 				 processRepository.findById(processId))

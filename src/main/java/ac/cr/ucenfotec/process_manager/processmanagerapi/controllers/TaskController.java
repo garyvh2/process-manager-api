@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ac.cr.ucenfotec.process_manager.entities.Process;
+import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
 import ac.cr.ucenfotec.process_manager.entities.ProcessInstance;
 import ac.cr.ucenfotec.process_manager.entities.Task;
 import ac.cr.ucenfotec.process_manager.entities.UserType;
@@ -21,6 +21,8 @@ import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundExce
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessInstanceRepository;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessRepository;
 import java.util.Optional;
+
+import javax.validation.Valid;
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -43,14 +45,15 @@ public class TaskController {
 	}
 	
 	@PutMapping
-	public void updateTask(Task updateTask) {
-		Optional<Process> initProcess = repository.findById(updateTask.getFatherProcess());
+	public void updateTask(@Valid @RequestBody Task updateTask) {
+		Optional<ProcessTemplate> initProcess = repository.findById(updateTask.getFatherProcess());
+		ProcessTemplate processToInstace = new ProcessInstance();
 		ProcessInstance pInstance;
-		
 		if(initProcess.isPresent()) {
 			ArrayList<Task> tasks = initProcess.get().getTasks();
 			updateTaskList(updateTask, tasks);
-			pInstance = (ProcessInstance) initProcess.get();
+			processToInstace = initProcess.get();
+			pInstance = (ProcessInstance) processToInstace;
 			pInstance.setTasks(tasks);
 			pInstance.setStatus(Status.EN_PROCESO);
 		}else {
@@ -87,8 +90,8 @@ public class TaskController {
 	}
 	
 	private void getFirstTaskInProcess(List<Task> userTasks, UserType pUserType) {
-		List<Process> listaProcesos = repository.findByFirstTask(pUserType);
-		for(Process process : listaProcesos) {
+		List<ProcessTemplate> listaProcesos = repository.findByFirstTask(pUserType);
+		for(ProcessTemplate process : listaProcesos) {
 			Task userTask = process.getTasks().get(0);
 			userTask.setFatherProcess(process.getNumeroTramite());
 			userTasks.add(userTask);

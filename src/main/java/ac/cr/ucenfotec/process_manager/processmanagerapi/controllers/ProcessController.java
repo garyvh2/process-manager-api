@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ac.cr.ucenfotec.process_manager.entities.Process;
+import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
 import ac.cr.ucenfotec.process_manager.entities.Task;
 import ac.cr.ucenfotec.process_manager.entities.UserType;
 import ac.cr.ucenfotec.process_manager.enums.Status;
@@ -34,46 +34,46 @@ public class ProcessController {
 	private ProcessRepository repository;
 	
 	@GetMapping
-    public List<Process> getAll(){		 
+    public List<ProcessTemplate> getAll(){		 
 		return  repository.findAll();
     }
 	
 	@GetMapping("/{processId}")
-	public ResponseEntity<Process> getProcess (@PathVariable String processId) {
-		Optional<Process> process = repository.findById(processId);
+	public ResponseEntity<ProcessTemplate> getProcess (@PathVariable String processId) {
+		Optional<ProcessTemplate> process = repository.findById(processId);
 		if(!process.isPresent()) {
 			throw new NotFoundException("id- " + processId);
 		}
 		
-		return new ResponseEntity<Process>(process.get(), HttpStatus.OK);
+		return new ResponseEntity<ProcessTemplate>(process.get(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Process> postProcess(@Valid @RequestBody Process process) {
-		Process newProcess = repository.save(process);
-		return new ResponseEntity<Process>( newProcess, HttpStatus.OK );
+	public ResponseEntity<ProcessTemplate> postProcess(@Valid @RequestBody ProcessTemplate process) {
+		ProcessTemplate newProcess = repository.save(process);
+		return new ResponseEntity<ProcessTemplate>( newProcess, HttpStatus.OK );
 	}
 	
 	@PutMapping("/{processId}")
-	public ResponseEntity<?> updateProcess(@PathVariable String processId, @Valid @RequestBody  Process process) {
-		Optional<Process> processTmp = repository.findById(processId);
+	public ResponseEntity<?> updateProcess(@PathVariable String processId, @Valid @RequestBody  ProcessTemplate process) {
+		Optional<ProcessTemplate> processTmp = repository.findById(processId);
 		if(!processTmp.isPresent()) {
 			throw new NotFoundException("id- " + processId);
 		}
 		process.setNumeroTramite(processId);
 		repository.save(process);
-		return new ResponseEntity<Process>(repository.save(process), HttpStatus.OK); 
+		return new ResponseEntity<ProcessTemplate>(repository.save(process), HttpStatus.OK); 
 	}
 	
 	@RequestMapping(value = "/{processId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteProcess(@PathVariable String processId){
-		Optional<Process> userT = repository.findById(processId);
+		Optional<ProcessTemplate> userT = repository.findById(processId);
 		if(!userT.isPresent()) {
 			throw new NotFoundException("id- " + processId);
 		}
 		repository.deleteById(processId);
 		
-		return new ResponseEntity<Process>(userT.get(), HttpStatus.OK); 
+		return new ResponseEntity<ProcessTemplate>(userT.get(), HttpStatus.OK); 
 	}
 	
 	

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Document(collection ="processes")
-public class Process {
+public class ProcessTemplate {
 	
 	@Id
 	String numeroTramite;
@@ -66,9 +66,9 @@ public class Process {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Process))
+		if (!(obj instanceof ProcessTemplate))
 			return false;
-		Process other = (Process) obj;
+		ProcessTemplate other = (ProcessTemplate) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
