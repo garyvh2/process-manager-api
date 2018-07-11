@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
+import ac.cr.ucenfotec.process_manager.entities.RootProcess;
 import ac.cr.ucenfotec.process_manager.entities.ProcessInstance;
 import ac.cr.ucenfotec.process_manager.entities.Task;
 import ac.cr.ucenfotec.process_manager.entities.UserType;
@@ -47,7 +48,7 @@ public class TaskController {
 	@PutMapping
 	public void updateTask(@Valid @RequestBody Task updateTask) {
 		Optional<ProcessTemplate> initProcess = repository.findById(updateTask.getFatherProcess());
-		ProcessTemplate processToInstace = new ProcessInstance();
+		RootProcess processToInstace;
 		ProcessInstance pInstance;
 		if(initProcess.isPresent()) {
 			ArrayList<Task> tasks = initProcess.get().getTasks();

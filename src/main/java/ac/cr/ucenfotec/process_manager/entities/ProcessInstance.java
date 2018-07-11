@@ -2,10 +2,9 @@ package ac.cr.ucenfotec.process_manager.entities;
 
 import ac.cr.ucenfotec.process_manager.enums.Status;
 import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
-public class ProcessInstance extends ProcessTemplate{
-	/**
-	 * 
-	 */
+
+public class ProcessInstance extends RootProcess{
+	
 	public ProcessInstance() {
 		super();
 		// TODO Auto-generated constructor stub
