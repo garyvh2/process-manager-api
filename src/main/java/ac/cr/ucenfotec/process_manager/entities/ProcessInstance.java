@@ -18,7 +18,11 @@ public class ProcessInstance extends RootProcess{
 		super();
 		this.status = status;
 	}
-
+	public ProcessInstance(ProcessTemplate pt) {
+		this.description = pt.description;
+		this.requester = pt.requester;
+		
+	}
 
 	private Status status;
 

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,13 +36,13 @@ public class TaskController {
 	private ProcessInstanceRepository instanceRepository;
 	
 	
-	@PostMapping("/getUserGroupTask")
-	public ArrayList<Task> getUserTask(@RequestBody UserType usertype){
+	@GetMapping("/getUserGroupTask/{idUserGroup}")
+	public ArrayList<Task> getUserTask(@PathVariable String idUserGroup){
 	
 		ArrayList<Task> userTaskList = new ArrayList<>();
-		
-		getFirstTaskInProcess(userTaskList, usertype);
-		getTaskInInstaces(userTaskList, usertype);
+		ObjectId mongoId = new ObjectId(idUserGroup);
+		getFirstTaskInProcess(userTaskList, mongoId);
+		getTaskInInstaces(userTaskList, mongoId);
 		
 		return userTaskList;
 	}
@@ -48,13 +50,11 @@ public class TaskController {
 	@PutMapping
 	public void updateTask(@Valid @RequestBody Task updateTask) {
 		Optional<ProcessTemplate> initProcess = repository.findById(updateTask.getFatherProcess());
-		RootProcess processToInstace;
 		ProcessInstance pInstance;
 		if(initProcess.isPresent()) {
 			ArrayList<Task> tasks = initProcess.get().getTasks();
 			updateTaskList(updateTask, tasks);
-			processToInstace = initProcess.get();
-			pInstance = (ProcessInstance) processToInstace;
+			pInstance = new ProcessInstance(initProcess.get());
 			pInstance.setTasks(tasks);
 			pInstance.setStatus(Status.EN_PROCESO);
 		}else {
@@ -81,16 +81,22 @@ public class TaskController {
 	}
 
 	private void updateTaskList(Task updateTask, List<Task> tasks) {
-		
+		int index;
+		Task lastTask = tasks.get(tasks.size() - 1);
 		for (Task task : tasks) {
 			if(task.getDescription().equals(updateTask.getDescription())) {
-				task = updateTask;
-				task.setTaskStaus(Status.COMPLETADO);
+				index = tasks.indexOf(task);
+				updateTask.setTaskStaus(Status.COMPLETADO);
+				tasks.set(index, updateTask);
+				
+				if(!task.getDescription().equals(lastTask.getDescription())) {
+					tasks.get(index + 1).setTaskStaus(Status.EN_PROCESO);
+				}
 			}
 		}
 	}
 	
-	private void getFirstTaskInProcess(List<Task> userTasks, UserType pUserType) {
+	private void getFirstTaskInProcess(List<Task> userTasks, ObjectId pUserType) {
 		List<ProcessTemplate> listaProcesos = repository.findByFirstTask(pUserType);
 		for(ProcessTemplate process : listaProcesos) {
 			Task userTask = process.getTasks().get(0);
@@ -99,12 +105,12 @@ public class TaskController {
 		}
 	}
 	
-	private void getTaskInInstaces(List<Task> userTasks, UserType pUserType) {
+	private void getTaskInInstaces(List<Task> userTasks, ObjectId pUserType) {
 		List<ProcessInstance> InstaceProcessList =  instanceRepository.findInstanceTask(pUserType, Status.EN_PROCESO);
 		for (ProcessInstance processInstance : InstaceProcessList) {
 			Task userTask = processInstance.getTasks()
 							.stream()
-							.filter(task -> pUserType.equals(task.getUserGroup()))
+							.filter(task -> pUserType.toString().equals(task.getUserGroup().getUserTypeId()))
 							.findAny()
 							.orElse(null);
 			userTask.setFatherProcess(processInstance.getNumeroTramite());

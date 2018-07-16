@@ -17,8 +17,8 @@ public class Question {
 	private String type;
 	
 	@NotNull
-	private ArrayList<String> AnswersToSelect;
-	private String UserAnswer;
+	private ArrayList<String> answersToSelect;
+	private String userAnswer;
 	
 	public String getQuestionText() {
 		return questionText;
@@ -37,19 +37,19 @@ public class Question {
 	}
 	
 	public ArrayList<String> getAnswersToSelect() {
-		return AnswersToSelect;
+		return answersToSelect;
 	}
 	
 	public void setAnswersToSelect(ArrayList<String> answersToSelect) {
-		AnswersToSelect = answersToSelect;
+		this.answersToSelect = answersToSelect;
 	}
 	
 	public String getUserAnswer() {
-		return UserAnswer;
+		return userAnswer;
 	}
 	
 	public void setUserAnswer(String userAnswer) {
-		UserAnswer = userAnswer;
+		this.userAnswer = userAnswer;
 	}
 
 	@Override
@@ -61,15 +61,15 @@ public class Question {
 		if (getClass() != obj.getClass())
 			return false;
 		Question other = (Question) obj;
-		if (AnswersToSelect == null) {
-			if (other.AnswersToSelect != null)
+		if (answersToSelect == null) {
+			if (other.answersToSelect != null)
 				return false;
-		} else if (!AnswersToSelect.equals(other.AnswersToSelect))
+		} else if (!answersToSelect.equals(other.answersToSelect))
 			return false;
-		if (UserAnswer == null) {
-			if (other.UserAnswer != null)
+		if (userAnswer == null) {
+			if (other.userAnswer != null)
 				return false;
-		} else if (!UserAnswer.equals(other.UserAnswer))
+		} else if (!userAnswer.equals(other.userAnswer))
 			return false;
 		if (questionText == null) {
 			if (other.questionText != null)
