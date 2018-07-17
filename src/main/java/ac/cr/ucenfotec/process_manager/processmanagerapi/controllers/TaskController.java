@@ -49,6 +49,7 @@ public class TaskController {
 	
 	@PutMapping
 	public void updateTask(@Valid @RequestBody Task updateTask) {
+		
 		Optional<ProcessTemplate> initProcess = repository.findById(updateTask.getFatherProcess());
 		ProcessInstance pInstance;
 		if(initProcess.isPresent()) {
@@ -81,6 +82,7 @@ public class TaskController {
 	}
 
 	private void updateTaskList(Task updateTask, List<Task> tasks) {
+		
 		int index;
 		Task lastTask = tasks.get(tasks.size() - 1);
 		for (Task task : tasks) {
@@ -97,6 +99,7 @@ public class TaskController {
 	}
 	
 	private void getFirstTaskInProcess(List<Task> userTasks, ObjectId pUserType) {
+		
 		List<ProcessTemplate> listaProcesos = repository.findByFirstTask(pUserType);
 		for(ProcessTemplate process : listaProcesos) {
 			Task userTask = process.getTasks().get(0);
@@ -106,6 +109,7 @@ public class TaskController {
 	}
 	
 	private void getTaskInInstaces(List<Task> userTasks, ObjectId pUserType) {
+		
 		List<ProcessInstance> InstaceProcessList =  instanceRepository.findInstanceTask(pUserType, Status.EN_PROCESO);
 		for (ProcessInstance processInstance : InstaceProcessList) {
 			Task userTask = processInstance.getTasks()

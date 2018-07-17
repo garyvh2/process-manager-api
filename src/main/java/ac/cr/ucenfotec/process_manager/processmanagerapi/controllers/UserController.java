@@ -38,6 +38,7 @@ public class UserController {
 	
 	@GetMapping("/{userId}")
 	public ResponseEntity<User> getUser (@PathVariable String userId) {
+		
 		Optional<User> user = repository.findById(userId);
 		
 		if(!user.isPresent()) {
@@ -53,6 +54,7 @@ public class UserController {
 	
 	@PutMapping("/{userId}")
 	public ResponseEntity<?> updateUser(@PathVariable String userId,@Valid @RequestBody  User user) {
+		
 		Optional<User> userT = repository.findById(userId);
 		
 		if(!userT.isPresent()) {
@@ -65,6 +67,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable String userId){
+		
 		Optional<User> userT = repository.findById(userId);
 		
 		if(!userT.isPresent()) {
@@ -77,6 +80,7 @@ public class UserController {
 	
 	@PostMapping("/authenticateUser")
 	public User authenticateUser (@RequestBody  User user) {
+		
 		Optional<User> authUser =  repository.findByUserEmailAndUserPassword(user.getUserEmail(), user.getUserPassword());
 		if(!authUser.isPresent()) {
 			throw new NotFoundException("couldn't find user");

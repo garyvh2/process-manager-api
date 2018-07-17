@@ -39,6 +39,7 @@ public class UserTypeController {
 	
 	@GetMapping("/{usertypeId}")
 	public ResponseEntity<UserType> getUserType (@PathVariable String usertypeId) {
+		
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
 			throw new NotFoundException("id- " + usertypeId);
@@ -54,6 +55,7 @@ public class UserTypeController {
 	
 	@PutMapping("/{usertypeId}")
 	public ResponseEntity<?> updateUserType(@PathVariable String usertypeId,@Valid @RequestBody  UserType ut) {
+		
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
 			throw new NotFoundException("id- " + usertypeId);
@@ -65,6 +67,7 @@ public class UserTypeController {
 	
 	@RequestMapping(value = "/{usertypeId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUserType(@PathVariable String usertypeId){
+		
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

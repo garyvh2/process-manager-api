@@ -40,6 +40,7 @@ public class ProcessController {
 	
 	@GetMapping("/{processId}")
 	public ResponseEntity<ProcessTemplate> getProcess (@PathVariable String processId) {
+		
 		Optional<ProcessTemplate> process = repository.findById(processId);
 		if(!process.isPresent()) {
 			throw new NotFoundException("id- " + processId);
@@ -50,12 +51,14 @@ public class ProcessController {
 	
 	@PostMapping
 	public ResponseEntity<ProcessTemplate> postProcess(@Valid @RequestBody ProcessTemplate process) {
+		
 		ProcessTemplate newProcess = repository.save(process);
 		return new ResponseEntity<ProcessTemplate>( newProcess, HttpStatus.OK );
 	}
 	
 	@PutMapping("/{processId}")
 	public ResponseEntity<?> updateProcess(@PathVariable String processId, @Valid @RequestBody  ProcessTemplate process) {
+		
 		Optional<ProcessTemplate> processTmp = repository.findById(processId);
 		if(!processTmp.isPresent()) {
 			throw new NotFoundException("id- " + processId);
@@ -67,6 +70,7 @@ public class ProcessController {
 	
 	@RequestMapping(value = "/{processId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteProcess(@PathVariable String processId){
+		
 		Optional<ProcessTemplate> userT = repository.findById(processId);
 		if(!userT.isPresent()) {
 			throw new NotFoundException("id- " + processId);
