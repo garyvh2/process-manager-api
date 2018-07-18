@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,7 @@ public class UserTypeController {
 		return  repository.findAll();
     }
 	
+	@CrossOrigin
 	@GetMapping("/{usertypeId}")
 	public ResponseEntity<UserType> getUserType (@PathVariable String usertypeId) {
 		
@@ -48,11 +50,13 @@ public class UserTypeController {
 		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<UserType> postUserType(@Valid @RequestBody UserType ut) {
 		return new ResponseEntity<UserType>( repository.save(ut), HttpStatus.OK );
 	}
 	
+	@CrossOrigin
 	@PutMapping("/{usertypeId}")
 	public ResponseEntity<?> updateUserType(@PathVariable String usertypeId,@Valid @RequestBody  UserType ut) {
 		
@@ -65,6 +69,7 @@ public class UserTypeController {
 		return new ResponseEntity<UserType>(updatedUserType, HttpStatus.OK); 
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "/{usertypeId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUserType(@PathVariable String usertypeId){
 		

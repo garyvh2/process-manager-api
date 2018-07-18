@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,11 +34,13 @@ public class ProcessController {
 	@Autowired
 	private ProcessRepository repository;
 	
+	@CrossOrigin
 	@GetMapping
     public List<ProcessTemplate> getAll(){		 
 		return  repository.findAll();
     }
 	
+	@CrossOrigin
 	@GetMapping("/{processId}")
 	public ResponseEntity<ProcessTemplate> getProcess (@PathVariable String processId) {
 		
@@ -49,6 +52,7 @@ public class ProcessController {
 		return new ResponseEntity<ProcessTemplate>(process.get(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<ProcessTemplate> postProcess(@Valid @RequestBody ProcessTemplate process) {
 		
@@ -56,6 +60,7 @@ public class ProcessController {
 		return new ResponseEntity<ProcessTemplate>( newProcess, HttpStatus.OK );
 	}
 	
+	@CrossOrigin
 	@PutMapping("/{processId}")
 	public ResponseEntity<?> updateProcess(@PathVariable String processId, @Valid @RequestBody  ProcessTemplate process) {
 		
@@ -68,6 +73,7 @@ public class ProcessController {
 		return new ResponseEntity<ProcessTemplate>(repository.save(process), HttpStatus.OK); 
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "/{processId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteProcess(@PathVariable String processId){
 		
@@ -80,6 +86,4 @@ public class ProcessController {
 		return new ResponseEntity<ProcessTemplate>(userT.get(), HttpStatus.OK); 
 	}
 	
-	
-
 }
