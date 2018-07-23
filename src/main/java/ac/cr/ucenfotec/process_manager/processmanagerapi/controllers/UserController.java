@@ -89,9 +89,9 @@ public class UserController {
 		
 		Optional<User> authUser =  repository.findByUserEmailAndUserPassword(user.getUserEmail(), user.getUserPassword());
 		if(!authUser.isPresent()) {
-			throw new NotFoundException("couldn't find user");
+			throw new NotFoundException("Usuario o password incorrectos");
 		}
 
-		return user;
+		return authUser.get();
 	}
 }
