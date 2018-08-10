@@ -11,22 +11,20 @@ import javax.validation.constraints.NotNull;
 public class Question {
 
 	@NotNull @NotBlank @NotEmpty
-	private String questionText;
+	private String name;
 	
+	private String placeholder;
+	
+	private String label;
 	@NotNull @NotBlank @NotEmpty
 	private String type;
 	
 	@NotNull
-	private ArrayList<String> answersToSelect;
-	private String userAnswer;
+	private ArrayList<String> options;
 	
-	public String getQuestionText() {
-		return questionText;
-	}
+	private String value;
 	
-	public void setQuestionText(String questionText) {
-		this.questionText = questionText;
-	}
+
 	
 	public String getType() {
 		return type;
@@ -36,20 +34,61 @@ public class Question {
 		this.type = type;
 	}
 	
-	public ArrayList<String> getAnswersToSelect() {
-		return answersToSelect;
-	}
+
 	
-	public void setAnswersToSelect(ArrayList<String> answersToSelect) {
-		this.answersToSelect = answersToSelect;
+
+
+	public String getName() {
+		return name;
 	}
-	
-	public String getUserAnswer() {
-		return userAnswer;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public void setUserAnswer(String userAnswer) {
-		this.userAnswer = userAnswer;
+
+	public String getPlaceholder() {
+		return placeholder;
+	}
+
+	public void setPlaceholder(String placeholder) {
+		this.placeholder = placeholder;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public ArrayList<String> getOptions() {
+		return options;
+	}
+
+	public void setOptions(ArrayList<String> options) {
+		this.options = options;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((options == null) ? 0 : options.hashCode());
+		result = prime * result + ((placeholder == null) ? 0 : placeholder.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
 	}
 
 	@Override
@@ -58,30 +97,42 @@ public class Question {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Question))
 			return false;
 		Question other = (Question) obj;
-		if (answersToSelect == null) {
-			if (other.answersToSelect != null)
+		if (label == null) {
+			if (other.label != null)
 				return false;
-		} else if (!answersToSelect.equals(other.answersToSelect))
+		} else if (!label.equals(other.label))
 			return false;
-		if (userAnswer == null) {
-			if (other.userAnswer != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!userAnswer.equals(other.userAnswer))
+		} else if (!name.equals(other.name))
 			return false;
-		if (questionText == null) {
-			if (other.questionText != null)
+		if (options == null) {
+			if (other.options != null)
 				return false;
-		} else if (!questionText.equals(other.questionText))
+		} else if (!options.equals(other.options))
+			return false;
+		if (placeholder == null) {
+			if (other.placeholder != null)
+				return false;
+		} else if (!placeholder.equals(other.placeholder))
 			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
 		return true;
-	}		
+	}
+
+	
 
 }
