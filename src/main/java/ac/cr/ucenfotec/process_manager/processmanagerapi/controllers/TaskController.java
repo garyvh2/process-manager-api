@@ -1,7 +1,6 @@
 package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -9,17 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
-import ac.cr.ucenfotec.process_manager.entities.RootProcess;
 import ac.cr.ucenfotec.process_manager.entities.ProcessInstance;
 import ac.cr.ucenfotec.process_manager.entities.Task;
-import ac.cr.ucenfotec.process_manager.entities.UserType;
 import ac.cr.ucenfotec.process_manager.enums.Status;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessInstanceRepository;
@@ -50,34 +46,23 @@ public class TaskController {
 	
 	@CrossOrigin
 	@PutMapping
-	public void updateTask(@Valid @RequestBody Task updateTask) {
+	public ProcessInstance updateTask(@Valid @RequestBody Task updateTask) {
 		
-		Optional<ProcessTemplate> initProcess = repository.findById(updateTask.getFatherProcess());
+		Optional<ProcessTemplate> initialProcess = repository.findById(updateTask.getFatherProcess());
 		ProcessInstance pInstance;
-		if(initProcess.isPresent()) {
-			ArrayList<Task> tasks = initProcess.get().getTasks();
-			updateTaskList(updateTask, tasks);
-			pInstance = new ProcessInstance(initProcess.get());
-			pInstance.setTasks(tasks);
-			pInstance.setStatus(Status.EN_PROCESO);
+		if(initialProcess.isPresent()) {
+			pInstance = getInstanceFromTemplate(initialProcess.get(), updateTask);
 		}else {
 			
 			Optional<ProcessInstance>  updateInstace = instanceRepository.findById(updateTask.getFatherProcess());
 			if(updateInstace.isPresent()) {
-				pInstance = updateInstace.get();
-				ArrayList<Task> tasks = pInstance.getTasks();
-				updateTaskList(updateTask, tasks);
-				pInstance.setTasks(tasks);
-				Task lastTask = pInstance.getTasks().get(pInstance.getTasks().size() - 1);
-				if( lastTask.getDescription().equals(updateTask.getDescription())) {
-					pInstance.setStatus(Status.COMPLETADO);
-				}
+				pInstance = updateInstanceTasks(updateInstace.get(), updateTask);
 			} else {
 				throw new NotFoundException("Task does not exist");
 			}
 			
 		}
-		instanceRepository.save(pInstance);
+		return instanceRepository.save(pInstance);
 		
 		
 		
@@ -99,7 +84,25 @@ public class TaskController {
 			}
 		}
 	}
-	
+	private ProcessInstance getInstanceFromTemplate(ProcessTemplate processTemp, Task updateTask) {
+		
+		ArrayList<Task> tasks = processTemp.getTasks();
+		updateTaskList(updateTask, tasks);
+		ProcessInstance pInstance = new ProcessInstance(processTemp);
+		pInstance.setTasks(tasks);
+		pInstance.setStatus(Status.EN_PROCESO);
+		return pInstance;
+	}
+	private ProcessInstance updateInstanceTasks(ProcessInstance pInstance, Task updateTask) {
+		ArrayList<Task> tasks = pInstance.getTasks();
+		updateTaskList(updateTask, tasks);
+		pInstance.setTasks(tasks);
+		Task lastTask = pInstance.getTasks().get(pInstance.getTasks().size() - 1);
+		if( lastTask.getDescription().equals(updateTask.getDescription())) {
+			pInstance.setStatus(Status.COMPLETADO);
+		}
+		return pInstance;
+	}
 	private void getFirstTaskInProcess(List<Task> userTasks, ObjectId pUserType) {
 		
 		List<ProcessTemplate> listaProcesos = repository.findByFirstTask(pUserType);

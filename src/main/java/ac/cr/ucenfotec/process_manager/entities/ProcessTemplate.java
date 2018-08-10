@@ -1,12 +1,8 @@
 package ac.cr.ucenfotec.process_manager.entities;
 
-import java.util.ArrayList;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Document(collection ="processes")
 public class ProcessTemplate extends RootProcess{

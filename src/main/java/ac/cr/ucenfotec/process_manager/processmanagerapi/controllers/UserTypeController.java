@@ -10,8 +10,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,25 +38,25 @@ public class UserTypeController {
 	
 	@CrossOrigin
 	@GetMapping("/{usertypeId}")
-	public ResponseEntity<UserType> getUserType (@PathVariable String usertypeId) {
+	public UserType getUserType (@PathVariable String usertypeId) {
 		
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
 			throw new NotFoundException("id- " + usertypeId);
 		}
 		
-		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK);
+		return  userT.get();
 	}
 	
 	@CrossOrigin
 	@PostMapping
-	public ResponseEntity<UserType> postUserType(@Valid @RequestBody UserType ut) {
-		return new ResponseEntity<UserType>( repository.save(ut), HttpStatus.OK );
+	public UserType postUserType(@Valid @RequestBody UserType ut) {
+		return  repository.save(ut);
 	}
 	
 	@CrossOrigin
 	@PutMapping("/{usertypeId}")
-	public ResponseEntity<?> updateUserType(@PathVariable String usertypeId,@Valid @RequestBody  UserType ut) {
+	public UserType updateUserType(@PathVariable String usertypeId,@Valid @RequestBody  UserType ut) {
 		
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
@@ -66,19 +64,19 @@ public class UserTypeController {
 		}
 		ut.setUserTypeId(usertypeId);
 		UserType updatedUserType = repository.save(ut);
-		return new ResponseEntity<UserType>(updatedUserType, HttpStatus.OK); 
+		return updatedUserType; 
 	}
 	
 	@CrossOrigin
 	@RequestMapping(value = "/{usertypeId}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteUserType(@PathVariable String usertypeId){
+	public UserType deleteUserType(@PathVariable String usertypeId){
 		
 		Optional<UserType> userT = repository.findById(usertypeId);
 		if(!userT.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			throw new NotFoundException("id- " + usertypeId);
 		}
 		repository.deleteById(usertypeId);
 		
-		return new ResponseEntity<UserType>(userT.get(), HttpStatus.OK); 		
+		return userT.get(); 		
 	}	
 }
