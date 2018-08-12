@@ -31,13 +31,14 @@ public class ProcessController {
 	private ProcessRepository repository;
 	
 	@CrossOrigin
-	@GetMapping
-    public List<ProcessTemplate> getAll(){		 
+	@GetMapping("/getAll")
+    public List<ProcessTemplate> getAll()
+	{		 
 		return  repository.findAll();
     }
 	
 	@CrossOrigin
-	@GetMapping("/{processId}")
+	@GetMapping("/getProcess/{processId}")
 	public ProcessTemplate getProcess (@PathVariable String processId) {
 		
 		Optional<ProcessTemplate> process = repository.findById(processId);
@@ -50,7 +51,7 @@ public class ProcessController {
 	
 	@CrossOrigin
 	@PostMapping
-	public ProcessTemplate postProcess(@Valid @RequestBody ProcessTemplate process) {
+	public ProcessTemplate postProcess(@RequestBody ProcessTemplate process) {
 		
 		return repository.save(process);
 	}

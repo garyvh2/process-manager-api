@@ -22,6 +22,7 @@ public class RootProcess {
 	
 	@NotNull
 	protected ArrayList<Task> tasks;
+	
 	protected User requester;
 	
 	public String getNumeroTramite() {
