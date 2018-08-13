@@ -15,6 +15,13 @@ public class ProcessHistory
 	@NotNull
 	private Task taskDone;
 	
+	public ProcessHistory(Task task) {
+		dateTimeHistory = new Date();
+		asignee =  task.getAsignee();
+		taskDone = task;
+		
+	}
+	
 	public Date getDateTimeHistory() {
 		return dateTimeHistory;
 	}
@@ -37,6 +44,37 @@ public class ProcessHistory
 	
 	public void setTaskDone(Task taskDone) {
 		this.taskDone = taskDone;
-	}		
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof ProcessHistory))
+			return false;
+		ProcessHistory other = (ProcessHistory) obj;
+		if (asignee == null) {
+			if (other.asignee != null)
+				return false;
+		} else if (!asignee.equals(other.asignee))
+			return false;
+		if (dateTimeHistory == null) {
+			if (other.dateTimeHistory != null)
+				return false;
+		} else if (!dateTimeHistory.equals(other.dateTimeHistory))
+			return false;
+		if (taskDone == null) {
+			if (other.taskDone != null)
+				return false;
+		} else if (!taskDone.equals(other.taskDone))
+			return false;
+		return true;
+	}	
+	
+	
+	
 
 }

@@ -1,0 +1,38 @@
+[
+    {
+        "asignee": null,
+        "description": "Solicitud de Prestamo",
+        "questions": [
+            {
+                "name": null,
+                "placeholder": null,
+                "label": null,
+                "type": "String",
+                "options": null,
+                "value": null
+            },
+            {
+                "name": null,
+                "placeholder": null,
+                "label": null,
+                "type": "Custom",
+                "options": null,
+                "value": null
+            },
+            {
+                "name": null,
+                "placeholder": null,
+                "label": null,
+                "type": "Custom",
+                "options": null,
+                "value": null
+            }
+        ],
+        "userGroup": {
+            "userTypeId": "5b3ac6d008b01908a8778ac7",
+            "userTypeName": "cliente"
+        },
+        "fatherProcess": "5b3ac7d408b01908a8778aca",
+        "taskStaus": null
+    }
+]

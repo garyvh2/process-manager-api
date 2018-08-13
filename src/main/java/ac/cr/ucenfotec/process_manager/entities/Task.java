@@ -73,6 +73,48 @@ public class Task {
 
 	public void setFatherProcess(String fatherProcess) {
 		this.fatherProcess = fatherProcess;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Task))
+			return false;
+		Task other = (Task) obj;
+		if (asignee == null) {
+			if (other.asignee != null)
+				return false;
+		} else if (!asignee.equals(other.asignee))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (fatherProcess == null) {
+			if (other.fatherProcess != null)
+				return false;
+		} else if (!fatherProcess.equals(other.fatherProcess))
+			return false;
+		if (questions == null) {
+			if (other.questions != null)
+				return false;
+		} else if (!questions.equals(other.questions))
+			return false;
+		if (taskStatus != other.taskStatus)
+			return false;
+		if (userGroup == null) {
+			if (other.userGroup != null)
+				return false;
+		} else if (!userGroup.equals(other.userGroup))
+			return false;
+		return true;
 	}	
+	
 	
 }

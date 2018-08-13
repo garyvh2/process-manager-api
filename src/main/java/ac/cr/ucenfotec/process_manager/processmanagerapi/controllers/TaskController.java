@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
+import ac.cr.ucenfotec.process_manager.entities.ProcessHistory;
 import ac.cr.ucenfotec.process_manager.entities.ProcessInstance;
 import ac.cr.ucenfotec.process_manager.entities.Task;
 import ac.cr.ucenfotec.process_manager.enums.Status;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.exceptions.NotFoundException;
+import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessHistoryRepository;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessInstanceRepository;
 import ac.cr.ucenfotec.process_manager.processmanagerapi.repositories.ProcessRepository;
 import java.util.Optional;
@@ -31,6 +33,9 @@ public class TaskController {
 	
 	@Autowired
 	private ProcessInstanceRepository instanceRepository;
+	
+	@Autowired
+	private ProcessHistoryRepository pHistoryRepository;
 	
 	@CrossOrigin
 	@GetMapping("/getUserGroupTask/{idUserGroup}")
@@ -50,6 +55,7 @@ public class TaskController {
 		
 		Optional<ProcessTemplate> initialProcess = repository.findById(updateTask.getFatherProcess());
 		ProcessInstance pInstance;
+		ProcessHistory pHistory;
 		if(initialProcess.isPresent()) {
 			pInstance = getInstanceFromTemplate(initialProcess.get(), updateTask);
 		}else {
@@ -62,6 +68,8 @@ public class TaskController {
 			}
 			
 		}
+		pHistory = new ProcessHistory(updateTask);
+		pHistoryRepository.save(pHistory);
 		return instanceRepository.save(pInstance);
 		
 		

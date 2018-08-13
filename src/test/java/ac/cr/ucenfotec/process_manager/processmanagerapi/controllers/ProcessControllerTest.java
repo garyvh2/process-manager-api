@@ -1,4 +1,4 @@
-package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers.test;
+package ac.cr.ucenfotec.process_manager.processmanagerapi.controllers;
 
 
 import org.junit.Before;
@@ -138,7 +138,7 @@ public class ProcessControllerTest {
 	 }
 	 
 	 @Test
-	 public void updateUserType() throws Exception {
+	 public void updateProcess() throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
 		 Optional<ProcessTemplate> oProcess =  Optional.of(process);
 		 ProcessTemplate updatedProcess = process;
@@ -163,7 +163,7 @@ public class ProcessControllerTest {
 	 }
 	 
 	 @Test
-	 public void updateUserTypeNotFound()throws Exception {
+	 public void updateProcessNotFound()throws Exception {
 		 Optional<ProcessTemplate> oProcess =  Optional.empty();
 		 ProcessTemplate updatedProcess = process;
 		 updatedProcess.getTasks().add(process.getTasks().get(0));
@@ -186,7 +186,7 @@ public class ProcessControllerTest {
 	 }
 	 
 	 @Test 
-	 public void updateInvalidUserType () throws Exception {
+	 public void updateInvalidProcess () throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
 		 Optional<ProcessTemplate> oProcess =  Optional.of(process);
 		 ProcessTemplate updatedProcess = process;
@@ -214,7 +214,7 @@ public class ProcessControllerTest {
 	 }
 	 
 	 @Test 
-	 public void deleteUserType() throws Exception {
+	 public void deleteProcess() throws Exception {
 
 		 Optional<ProcessTemplate> oProcess =  Optional.of(process);
 		 String jsonUserType =  mapper.writeValueAsString(process);
@@ -235,7 +235,7 @@ public class ProcessControllerTest {
 	 }
 	 
 	 @Test
-	 public void deleteUserTypeNotFound() throws Exception {
+	 public void deleteProcessNotFound() throws Exception {
 		 ObjectMapper mapper = new ObjectMapper();
 		 Optional<ProcessTemplate> oProcess =  Optional.empty();
 		 String jsonUserType =  mapper.writeValueAsString(process);

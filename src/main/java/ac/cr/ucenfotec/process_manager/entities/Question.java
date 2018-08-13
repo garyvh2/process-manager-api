@@ -14,12 +14,11 @@ public class Question {
 	private String name;
 	
 	private String placeholder;
-	
+	@NotNull @NotBlank @NotEmpty
 	private String label;
 	@NotNull @NotBlank @NotEmpty
 	private String type;
 	
-	@NotNull
 	private ArrayList<String> options;
 	
 	private String value;

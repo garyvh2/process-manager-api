@@ -64,4 +64,49 @@ public class RootProcess {
 		this.requester = requester;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((numeroTramite == null) ? 0 : numeroTramite.hashCode());
+		result = prime * result + ((requester == null) ? 0 : requester.hashCode());
+		result = prime * result + ((tasks == null) ? 0 : tasks.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof RootProcess))
+			return false;
+		RootProcess other = (RootProcess) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (numeroTramite == null) {
+			if (other.numeroTramite != null)
+				return false;
+		} else if (!numeroTramite.equals(other.numeroTramite))
+			return false;
+		if (requester == null) {
+			if (other.requester != null)
+				return false;
+		} else if (!requester.equals(other.requester))
+			return false;
+		if (tasks == null) {
+			if (other.tasks != null)
+				return false;
+		} else if (!tasks.equals(other.tasks))
+			return false;
+		return true;
+	}
+	
+	
+
 }

@@ -7,16 +7,18 @@
             "description": "Solicitud de Prestamo",
             "questions": [
                 {
-                    "questionText": "Digite su numero de cedula",
+                    "label": "Digite su numero de cedula",
+                    "name": "cedula",
                     "type": "String",
-                    "userAnswer": null,
-                    "answersToSelect": null
+                    "value": null,
+                    "options": null
                 },
                 {
-                    "questionText": "Para que es el prestamo",
+                    "label": "Para que es el prestamo",
+                    "name": "prestamo",
                     "type": "Custom",
-                    "userAnswer": null,
-                    "answersToSelect": [
+                    "value": null,
+                    "options": [
                         "Carro",
                         "Vivienda",
                         "Estudio",
@@ -24,10 +26,11 @@
                     ]
                 },
                 {
-                    "questionText": "Digite el monto que desea obtener",
+                    "label": "Digite el monto que desea obtener",
+                    "name": "monto",
                     "type": "Custom",
-                    "userAnswer": null,
-                    "answersToSelect": null
+                    "value": null,
+                    "options": null
                 }
             ],
             "userGroup": {
@@ -41,19 +44,21 @@
             "description": "Verificar requisitos",
             "questions": [
                 {
-                    "questionText": "Es mayor de edad",
+                    "label": "Es mayor de edad",
+                    "name": "edad",
                     "type": "Custom",
-                    "userAnswer": null,
-                    "answersToSelect": [
+                    "value": null,
+                    "options": [
                         "Si",
                         "No"
                     ]
                 },
                 {
-                    "questionText": "Puede pagar el prestamo",
+                    "label": "Puede pagar el prestamo",
+                    "name": "puedePagar",
                     "type": "Custom",
-                    "userAnswer": null,
-                    "answersToSelect": [
+                    "value": null,
+                    "options": [
                         "Si",
                         "No"
                     ]
@@ -70,10 +75,11 @@
             "description": "Aprobar prestamo",
             "questions": [
                 {
-                    "questionText": "Ha revisado y acepta el prestar el dinero a este cliente",
+                    "label": "Ha revisado y acepta el prestar el dinero a este cliente",
+                    "name": "revision",
                     "type": "Custom",
-                    "userAnswer": null,
-                    "answersToSelect": [
+                    "value": null,
+                    "options": [
                         "Si",
                         "No"
                     ]

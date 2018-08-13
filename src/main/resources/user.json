@@ -1,0 +1,10 @@
+ {
+        "userId": "5b4c166208b0192a20d182cb",
+        "userName": "Adrian13",
+        "userPassword": "123123312",
+        "userEmail": "adrian@gmail.com",
+        "userGroup": {
+            "userTypeId": null,
+            "userTypeName": "cliente"
+        }
+}

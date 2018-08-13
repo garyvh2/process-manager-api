@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import ac.cr.ucenfotec.process_manager.entities.ProcessTemplate;
-import ac.cr.ucenfotec.process_manager.entities.UserType;;
+;
 
 public interface ProcessRepository extends MongoRepository<ProcessTemplate, String>{
 	
