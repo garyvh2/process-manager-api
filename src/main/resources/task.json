@@ -1,0 +1,39 @@
+{
+    "asignee" : {
+        "userName" : "Adrian13",
+        "userEmail" : "adrian@gmail.com",
+        "userGroup" : {
+            "userTypeName" : "cliente"
+        }
+    },
+    "description" : "Solicitud de Prestamo",
+    "questions" : [ 
+        {
+            "label" : "Digite su numero de cedula",
+            "type" : "String",
+            "value" : "1231242141241"
+        }, 
+        {
+            "label" : "Para que es el prestamo",
+            "type" : "Custom",
+            "options" : [ 
+                "Carro", 
+                "Vivienda", 
+                "Estudio", 
+                "Otro"
+            ],
+            "value" : "Carro"
+        }, 
+        {
+            "label" : "Digite el monto que desea obtener",
+            "type" : "Custom",
+            "value" : "1200000"
+        }
+    ],
+    "userGroup" : {
+        "userTypeId" :"5b3ac6d008b01908a8778ac7",
+        "userTypeName" : "cliente"
+    },
+    "taskStatus" : "EN_PROCESO",
+    "fatherProcess" : "5b3ac7d408b01908a8778aca"
+}
